@@ -9,14 +9,22 @@ public class Formatador{
     // Se a palavra estiver vazia tambem retorna a excecao
     // Retorna a palavra em maiusculas 
     public String formataPalavra(String palavra){
-        //TODO
-    	return null;
+        if(palavra.equals(""))
+        	throw new IllegalArgumentException();
+       for(int i = 0;i<palavra.length();i++) {
+    	   if(!Character.isLetterOrDigit(palavra.charAt(i))) {
+    		   throw new IllegalArgumentException();
+    	   }
+       }
+       palavra = palavra.toUpperCase();
+    	return palavra;
     }
 
     // Utiliza o metodo formataPalavra e confere se a primeira letra nao e numerica
     public String formataPalavraPlus(String palavra) {
-        //TODO
-    	return null;
+        if(Character.isDigit(palavra.charAt(0)))
+        		throw new IllegalArgumentException();
+    	return formataPalavra(palavra);
     }
 
     // Formata frases compostas por palavras separadas por espacos em branco e/ou simbolos de pontuacao
@@ -25,7 +33,11 @@ public class Formatador{
     // Qualquer outro simbolo gera IllegalArgumentException
     // Retorna um array de palavras validas 
     public String formataFrase(String frase){
-        //TODO
-    	return null;
+        String [] fraseSemEspaco =  frase.split(" ");
+        String ret = "";
+        for(int i = 0; i<fraseSemEspaco.length;i++) {
+        	ret = formataPalavra(fraseSemEspaco[i])+" ";
+        }
+        return ret;
     }
 }
