@@ -13,17 +13,20 @@ public class Calculador{
     }
 
     public int calculaNumeroDaVida(String data){
-        int numero = 0;
+    	String palavra = formatador.formataFrase(data);
+    	int numero = reducao.reducaoFrase(palavra);
         return numero;
     }
 
     public int calculaNumeroDestino(String nomeCompleto){
-        int numero = 0;
+    	String palavra = formatador.formataFrase(nomeCompleto);
+    	int numero = reducao.reducaoFrase(palavra);
         return numero;
     }
 
     public int calculaNumeroDesejosDaAlma(String nomeCompleto){
-    	int numero = 0;
+    	String palavra = formatador.formataFrase(nomeCompleto);
+    	int numero = reducao.reducaoFrase(palavra);
         return numero;
     }
 }
