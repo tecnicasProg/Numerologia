@@ -102,7 +102,7 @@ public class Redutor{
 
     // Decodifica um caracter segundo a tabela selecionada
     private int decodChar(char c){
-        if(tipoTab.instanceOf(TipoTabela.CHALDEAN))
+        if(tipoTab == TipoTabela.CHALDEAN)
           return tabChaldean(c);
         else
           return tabPitagorica(c);
@@ -117,10 +117,10 @@ public class Redutor{
     public int reducaoPalavra(String palavra){
         int count = 0;
 
-        for(int i=0;i<palavara.length();i++){
+        for(int i=0;i<palavra.length();i++){
           char c = palavra.charAt(i);
-          if(c.isNumber())
-            count += Integer.parseInt(c);
+          if(Character.isDigit(c))
+            count += Integer.parseInt(Character.toString(c));
           else
             count += decodChar(c);
         }
@@ -143,13 +143,14 @@ public class Redutor{
     // Se estiver fora do formato lanca IllegalArgumentException
     public int reducaoData(String data){
         String[] vet = data.split("/");
-        if(vet.length != 3 || vet[0].length()!=2 || vet[1].length()!=2 || vet[2].length()!=4)
-          throw new IllegalArgumentException();
         int count = 0;
 
-        for(int i=0;i<3;i++)
-          count += reducaoSimples(vet[i]);
+        if(vet.length != 3 || vet[0].length()!=2 || vet[1].length()!=2 || vet[2].length()!=4)
+          throw new IllegalArgumentException();
 
-        return ;
+        for(int i=0;i<3;i++)
+          count += reducaoPalavra(vet[i]);
+
+        return count;
     }
 }
