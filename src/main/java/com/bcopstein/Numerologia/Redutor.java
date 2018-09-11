@@ -102,13 +102,10 @@ public class Redutor{
 
     // Decodifica um caracter segundo a tabela selecionada
     private int decodChar(char c){
-        //TODO
-        return 0;
-    }
-
-    private String reducaoSimples(String str){
-        //TODO
-        return null;
+        if(tipoTab.instanceOf(TipoTabela.CHALDEAN))
+          return tabChaldean(c);
+        else
+          return tabPitagorica(c);
     }
 
     // Define o tipo de tabela da tabela corrente
@@ -118,20 +115,41 @@ public class Redutor{
 
     // Calcula a reducao de palavra usando a tabela corrente
     public int reducaoPalavra(String palavra){
-        //TODO
-        return 0;
+        int count = 0;
+
+        for(int i=0;i<palavara.length();i++){
+          char c = palavra.charAt(i);
+          if(c.isNumber())
+            count += Integer.parseInt(c);
+          else
+            count += decodChar(c);
+        }
+
+        return count;
     }
 
     // Calcula a reducao de frase usando a tabela corrente
     public int reducaoFrase(String frase){
-        //TODO
-        return 0;
+        int count = 0;
+        String[] vetor = frase.split(" ");
+
+        for(int i=0;i<vetor.length;i++)
+          count += reducaoPalavra(vetor[i]);
+
+        return count;
     }
 
     // Calcula a reducao de uma data no formato dd/mm/aaaa
     // Se estiver fora do formato lanca IllegalArgumentException
     public int reducaoData(String data){
-        //TODO
-        return 0;
+        String[] vet = data.split("/");
+        if(vet.length != 3 || vet[0].length()!=2 || vet[1].length()!=2 || vet[2].length()!=4)
+          throw new IllegalArgumentException();
+        int count = 0;
+
+        for(int i=0;i<3;i++)
+          count += reducaoSimples(vet[i]);
+
+        return ;
     }
 }
