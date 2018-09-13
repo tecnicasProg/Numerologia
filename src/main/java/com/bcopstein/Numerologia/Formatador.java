@@ -2,7 +2,7 @@ package com.bcopstein.Numerologia;
 
 import java.util.regex.Pattern;
 
-public class Formatador{
+public class Formatador implements IFormatador{
     // Formata uma palavra da lingua inglesa
     // A palavra recebida so pode conter letras ou digitos
     // Se a palavra contiver qualquer outro tipo de simbolo deve retornar IllegalArgumentException
@@ -13,7 +13,7 @@ public class Formatador{
         	throw new IllegalArgumentException();
        for(int i = 0;i<palavra.length();i++) {
     	   if(!Character.isLetterOrDigit(palavra.charAt(i))) {
-    		   throw new IllegalArgumentException();
+    		   throw new IllegalArgumentException("Argumento Invalido");
     	   }
        }
        palavra = palavra.toUpperCase();
@@ -23,7 +23,7 @@ public class Formatador{
     // Utiliza o metodo formataPalavra e confere se a primeira letra nao e numerica
     public String formataPalavraPlus(String palavra) {
         if(Character.isDigit(palavra.charAt(0)))
-        		throw new IllegalArgumentException();
+        		throw new IllegalArgumentException("Argumento Invalido");
     	return formataPalavra(palavra);
     }
 
@@ -36,7 +36,10 @@ public class Formatador{
         String [] fraseSemEspaco =  frase.split(" ");
         String ret = "";
         for(int i = 0; i<fraseSemEspaco.length;i++) {
-        	ret = formataPalavra(fraseSemEspaco[i])+" ";
+        	if(i==fraseSemEspaco.length-1) {
+        		ret += formataPalavra(fraseSemEspaco[i]);
+        	}else
+        		ret += formataPalavra(fraseSemEspaco[i])+" ";
         }
         return ret;
     }
