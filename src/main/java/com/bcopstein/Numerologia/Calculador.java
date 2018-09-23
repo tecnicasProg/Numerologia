@@ -14,7 +14,7 @@ public class Calculador{
 
     public int calculaNumeroDaVida(String data){
     	String palavra = formatador.formataFrase(data);
-    	int numero = reducao.reducaoFrase(palavra);
+    	int numero = reducao.reducaoData(palavra);
         return numero;
     }
 
